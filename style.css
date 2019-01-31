@@ -1,0 +1,79 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #e8ebed;
+
+}
+.container {
+  position: relative;
+  display: flex;
+  justify-content: space-between; 
+  flex-direction: column;
+  height: 350px;
+  width: 500px;
+
+  /*border: 1px solid red;*/
+}
+.mainBlock {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.pictureBlock {
+  position: relative;/*
+  border: 1px solid blue;*/
+  height: 300px;
+  width: 350px;
+  background-color: #fff;
+  background: url('golden-retriever-puppy.jpg') no-repeat;
+  background-size: cover;
+}
+
+.arrow { 
+  position: relative;
+  /*border: 1px solid green;  */
+  width: 75px;
+  height: 300px;
+  opacity: 0.3;
+}
+
+.left {
+  position: relative;
+  background: url('back.png') 50% 50% no-repeat;
+  background-size: contain;
+
+}
+.right {
+  position: relative;
+  background: url('forward.png') 50% 50% no-repeat;
+  background-size: contain;
+
+}
+
+.indicator {
+  display: flex;
+  position: relative;
+  /*border: 1px solid black;*/
+  width: 500px;
+  height: 50px;
+}
+
+ul {
+  width:100%;
+  display: flex;
+  justify-content: space-around;
+}
+li {
+  display: ;
+  height: 10px;
+  width:10px;
+  border: 2px solid darkgray;
+  background-color: whitesmoke;
+  border-radius: 50%;
+  list-style-type: none;
+}
+#start {
+  background-color: lightgray;
+}
