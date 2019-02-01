@@ -8,11 +8,12 @@ let picArr = [
   'Airedale.jpg',
 ];   
 //function for control slide show
+
 let idInterval;
 function showControl() {
   if(idInterval){    
     clearInterval(idInterval);
-    idInterval = undefined;
+    idInterval = null;
   } else {
     idInterval = setInterval(function(){showNextPic(picArr);}, 2000);
   } 
