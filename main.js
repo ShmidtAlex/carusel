@@ -1,5 +1,4 @@
-// window.onload = function(){
-//   console.log('the html page is entirely downloaded, sir!');
+//array with photo
 let picArr = [
   'golden-retriever-puppy.jpg',
   'Drathaar.jpg',
@@ -8,19 +7,18 @@ let picArr = [
   'rizenshnautser.jpg',
   'Airedale.jpg',
 ];   
-
-const startSlideShow = function(){  
-  setInterval(function(){
-     showNextPic(picArr); 
-  }, 1000);
- 
+//function for control slide show
+let idInterval;
+function showControl() {
+  if(idInterval){    
+    clearInterval(idInterval);
+    idInterval = undefined;
+  } else {
+    idInterval = setInterval(function(){showNextPic(picArr);}, 2000);
+  } 
 }
 
-function stopSlideShow(){
-  clearInterval(startSlideShow);
-}
-
-
+//function for getting running array index of running photo
 function getIndex(arr) {
   let runningPic = document.querySelector('.pictureBlock');
   let pic = window.getComputedStyle(runningPic);
@@ -34,7 +32,7 @@ function getIndex(arr) {
   }
 }
 
-//this function have to contain recursion, which will remember the running value of ind.
+//function for showing next picture in manual mode
 function showNextPic(arr){
   let ind = getIndex(arr);
   //console.log(arr.length);
@@ -53,6 +51,7 @@ function showNextPic(arr){
     indicatorItems[arr.length-1].style.backgroundColor = 'whitesmoke';
   }  
 }
+//function for showing previous photo in manual mode
 function showPrevPic(arr) {
   let ind = getIndex(arr);
   let indicatorItems = document.querySelectorAll('li');
@@ -69,15 +68,11 @@ function showPrevPic(arr) {
     indicatorItems[0].style.backgroundColor = 'whitesmoke';
   }    
 }
-
-// console.log(indicatorItems[0]);
   const fW = document.querySelector('.right');
-  //console.log(fW);
   fW.addEventListener('click', function(){showNextPic(picArr)});
   fW.addEventListener('click', function(){stopSlideShow()});
   const bW = document.querySelector('.left');
-  //console.log(bW);
   bW.addEventListener('click', function(){showPrevPic(picArr)});
+  //picture as a button for slideshow.
   const slideShowButton = document.querySelector('.pictureBlock');
-  //console.log(playSlideShow);
-  slideShowButton.addEventListener('click', startSlideShow);
+  slideShowButton.addEventListener('click', showControl);
