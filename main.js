@@ -8,12 +8,11 @@ let picArr = [
   'Airedale.jpg',
 ];   
 //function for control slide show
-
 let idInterval;
-function showControl() {
+function showControl() { 
   if(idInterval){    
     clearInterval(idInterval);
-    idInterval = null;
+    return idInterval = undefined;
   } else {
     idInterval = setInterval(function(){showNextPic(picArr);}, 2000);
   } 
@@ -71,7 +70,7 @@ function showPrevPic(arr) {
 }
   const fW = document.querySelector('.right');
   fW.addEventListener('click', function(){showNextPic(picArr)});
-  fW.addEventListener('click', function(){stopSlideShow()});
+  //fW.addEventListener('click', function(){stopSlideShow()});
   const bW = document.querySelector('.left');
   bW.addEventListener('click', function(){showPrevPic(picArr)});
   //picture as a button for slideshow.
