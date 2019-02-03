@@ -1,5 +1,5 @@
 //array with photo
-let picArr = [
+const picArr = [
   'golden-retriever-puppy.jpg',
   'Drathaar.jpg',
   "beagle.jpg",
@@ -68,11 +68,11 @@ function showPrevPic(arr) {
     indicatorItems[0].style.backgroundColor = 'whitesmoke';
   }    
 }
-  const fW = document.querySelector('.right');
-  fW.addEventListener('click', function(){showNextPic(picArr)});
+  const forward = document.querySelector('.right');
+  forward.addEventListener('click', function(){showNextPic(picArr)});
   //fW.addEventListener('click', function(){stopSlideShow()});
-  const bW = document.querySelector('.left');
-  bW.addEventListener('click', function(){showPrevPic(picArr)});
+  const backward = document.querySelector('.left');
+  backward.addEventListener('click', function(){showPrevPic(picArr)});
   //picture as a button for slideshow.
   const slideShowButton = document.querySelector('.pictureBlock');
   slideShowButton.addEventListener('click', showControl);
