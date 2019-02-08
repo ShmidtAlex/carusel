@@ -52,7 +52,6 @@ function showControl() {
 }
   const forward = document.querySelector('.right');
   forward.addEventListener('click', showNextPic);
-  //fW.addEventListener('click', function(){stopSlideShow()});
   const backward = document.querySelector('.left');
   backward.addEventListener('click', showPreviousPic);
   //picture as a button for slideshow.
