@@ -1,6 +1,5 @@
 let imageIndex = 0;
 //we'll ivoke this constant as an argument in handler functions
-let pictureBlock, indicatorItems, idInterval;
 
 //array with photo
 const picArr = [
@@ -12,18 +11,18 @@ const picArr = [
   'Airedale.jpg',
 ];
 
-//get access to "container" div
-let nodesList = document.body.children[0];
+//get access to "container" div WE DON'T USE WAYS LIKE document.body.children[0], it's UNSAFE!
+const nodesList = document.getElementById('container');
 
 //create new div class mainBlock and incert it at the begining of the child nodes list
-let mainBlockNode = document.createElement('div');
+const mainBlockNode = document.createElement('div');
 nodesList.appendChild(mainBlockNode);
 mainBlockNode.setAttribute('class', 'mainBlock');
 
-//create new inputs and div.pictureBlock
-let leftButton = document.createElement('input');
-let rightButton = document.createElement('input');
-let pictureBlockNode = document.createElement('div');
+//create new buttons and div.pictureBlock
+const leftButton = document.createElement('button');
+const rightButton = document.createElement('button');
+const pictureBlockNode = document.createElement('img');
 
 //set up attributes of mainBlock child nodes
 leftButton.setAttribute('type', 'button');
@@ -38,14 +37,13 @@ mainBlockNode.appendChild(pictureBlockNode);
 mainBlockNode.appendChild(rightButton);
 
 //create div.indicator 
-let divIndicator = document.createElement('div');
+const divIndicator = document.createElement('div');
 
 //add div.indicator as a last child in nodesList and set it's attributes
 nodesList.appendChild(divIndicator).setAttribute('class', 'indicator');
-
 //assing needed values to declared earlier variables
-pictureBlock = document.querySelector('.pictureBlock');
-indicatorItems = document.querySelectorAll('li');
+const pictureBlock = document.querySelector('.pictureBlock');
+const indicatorItems = document.querySelectorAll('li');
 
 //invoke function for displaying first picture and pannel of indicators
 showImage(imageIndex, pictureBlock);
@@ -56,7 +54,7 @@ function showImage(imageIndex, containerElement){
   containerElement.style.backgroundImage = "url(" +picArr[imageIndex]+ ")";
   //get list of indicators
   let indItems;
-  let indicatorList = document.getElementById('indicatorList');
+  const indicatorList = document.getElementById('indicatorList');
   if(indicatorList) {
     //let indicatorList = document.getElementById('indicatorList');
     //delete list of indicators
@@ -66,7 +64,7 @@ function showImage(imageIndex, containerElement){
   divIndicator.appendChild(indItems);
   indItems.setAttribute('id', 'indicatorList');
   for (let i = 0; i < 6; i++){
-    let item = document.createElement('li');
+    const item = document.createElement('li');
     indItems.appendChild(item);
   }
   //change colour of running indicator item
@@ -90,7 +88,7 @@ function showPreviousPic(){
   showImage(imageIndex, pictureBlock);
 }
 
-
+let idInterval;
 function showControl() { 
   if(idInterval){    
     clearInterval(idInterval);
