@@ -41,9 +41,9 @@ const divIndicator = document.createElement('div');
 
 //add div.indicator as a last child in nodesList and set it's attributes
 nodesList.appendChild(divIndicator).setAttribute('class', 'indicator');
-//assing needed values to declared earlier variables
+
+//define const, which keep block with photo
 const pictureBlock = document.querySelector('.pictureBlock');
-const indicatorItems = document.querySelectorAll('li');
 
 //invoke function for displaying first picture and pannel of indicators
 showImage(imageIndex, pictureBlock);
@@ -52,23 +52,30 @@ showImage(imageIndex, pictureBlock);
 
 function showImage(imageIndex, containerElement){
   containerElement.style.backgroundImage = "url(" +picArr[imageIndex]+ ")";
-  //get list of indicators
+ //get list of indicators
   let indItems;
   const indicatorList = document.getElementById('indicatorList');
   if(indicatorList) {
-    //let indicatorList = document.getElementById('indicatorList');
     //delete list of indicators
     divIndicator.removeChild(indicatorList);
   } 
+  //create new element with other picture
   indItems = document.createElement('ul');    
   divIndicator.appendChild(indItems);
   indItems.setAttribute('id', 'indicatorList');
-  for (let i = 0; i < 6; i++){
-    const item = document.createElement('li');
+  for (let i = 0; i < picArr.length; i++){
+    item = document.createElement('li');
     indItems.appendChild(item);
+    item.setAttribute('data-order', i);
+    //for handling events after recreation indicator board we neeed reassign event handler to a new list
+    //of indicators
+    let items = document.querySelectorAll('li');
+    items.forEach(item => item.addEventListener('click', defineIndicatorNumber));
   }
   //change colour of running indicator item
-  indItems.childNodes[imageIndex].setAttribute('id', 'start');  
+   
+  indItems.childNodes[imageIndex].setAttribute('id', 'start');
+
 }
 
 function showNextPic(){  
@@ -79,6 +86,7 @@ function showNextPic(){
   }  
   showImage(imageIndex, pictureBlock);
 }
+
 function showPreviousPic(){
   if (imageIndex > 0){
     imageIndex--;   
@@ -89,6 +97,7 @@ function showPreviousPic(){
 }
 
 let idInterval;
+
 function showControl() { 
   if(idInterval){    
     clearInterval(idInterval);
@@ -97,10 +106,20 @@ function showControl() {
     idInterval = setInterval(function(){showNextPic(picArr);}, 2000);
   } 
 }
+function defineIndicatorNumber(e){
+  imageIndex = Number(e.target.getAttribute('data-order'));
+  showImage(imageIndex, pictureBlock);
+}
+
 const forward = document.querySelector('.right');
 forward.addEventListener('click', showNextPic);
 const backward = document.querySelector('.left');
 backward.addEventListener('click', showPreviousPic);
+
 //picture as a button for slideshow.
 const slideShowButton = document.querySelector('.pictureBlock');
 slideShowButton.addEventListener('click', showControl);
+
+//define const, which keep massive like object of li items
+const indicatorButton = document.querySelectorAll('li');
+indicatorButton.forEach(item => item.addEventListener('click', defineIndicatorNumber));
