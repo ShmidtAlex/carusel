@@ -100,11 +100,14 @@ let idInterval;
 
 function showControl() { 
   if(idInterval){    
-    clearInterval(idInterval);
-    return idInterval = undefined;
+   stopSlideshow();
   } else {
     idInterval = setInterval(function(){showNextPic(picArr);}, 2000);
   } 
+}
+function stopSlideshow(){  
+  clearInterval(idInterval);
+  return idInterval = undefined;
 }
 function defineIndicatorNumber(e){
   imageIndex = Number(e.target.getAttribute('data-order'));
@@ -113,8 +116,11 @@ function defineIndicatorNumber(e){
 
 const forward = document.querySelector('.right');
 forward.addEventListener('click', showNextPic);
+forward.addEventListener('click', stopSlideshow);
 const backward = document.querySelector('.left');
 backward.addEventListener('click', showPreviousPic);
+backward.addEventListener('click', stopSlideshow);
+
 
 //picture as a button for slideshow.
 const slideShowButton = document.querySelector('.pictureBlock');
