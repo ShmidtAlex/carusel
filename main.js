@@ -67,10 +67,8 @@ function showImage(imageIndex, containerElement){
     item = document.createElement('li');
     indItems.appendChild(item);
     item.setAttribute('data-order', i);
-    //for handling events after recreation indicator board we neeed reassign event handler to a new list
-    //of indicators
-    let items = document.querySelectorAll('li');
-    items.forEach(item => item.addEventListener('click', defineIndicatorNumber));
+    //for handling events after recreation indicator board we neeed reassign event handler to every new indicator
+    item.addEventListener('click', defineIndicatorNumber);
   }
   //change colour of running indicator item
    
