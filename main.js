@@ -25,8 +25,6 @@ const rightButton = document.createElement('button');
 const pictureBlockNode = document.createElement('img');
 
 //set up attributes of mainBlock child nodes
-leftButton.setAttribute('type', 'button');
-rightButton.setAttribute('type', 'button');
 leftButton.setAttribute('class', 'arrow left');
 rightButton.setAttribute('class', 'arrow right');
 pictureBlockNode.setAttribute('class', 'pictureBlock');
