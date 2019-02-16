@@ -41,13 +41,13 @@ body {
 
 .left {
   position: relative;
-  background: url('back.png') 50% 50% no-repeat;
+  background: url('./images/back.png') 50% 50% no-repeat;
   background-size: contain;
 
 }
 .right {
   position: relative;
-  background: url('forward.png') 50% 50% no-repeat;
+  background: url('./images/forward.png') 50% 50% no-repeat;
   background-size: contain;
 
 }

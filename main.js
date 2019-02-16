@@ -49,7 +49,7 @@ showImage(imageIndex, pictureBlock);
 
 
 function showImage(imageIndex, containerElement){
-  containerElement.style.backgroundImage = "url(" +picArr[imageIndex]+ ")";
+  containerElement.style.backgroundImage = `url(./images/${picArr[imageIndex]})`;
  //get list of indicators
   let indItems;
   const indicatorList = document.getElementById('indicatorList');
@@ -61,6 +61,7 @@ function showImage(imageIndex, containerElement){
   indItems = document.createElement('ul');    
   divIndicator.appendChild(indItems);
   indItems.setAttribute('id', 'indicatorList');
+
   for (let i = 0; i < picArr.length; i++){
     item = document.createElement('li');
     indItems.appendChild(item);
@@ -103,7 +104,7 @@ function showControl() {
 }
 function stopSlideshow(){  
   clearInterval(idInterval);
-  return idInterval = undefined;
+  idInterval = undefined;
 }
 function defineIndicatorNumber(e){
   imageIndex = Number(e.target.getAttribute('data-order'));
