@@ -49,30 +49,26 @@ showImage(imageIndex, pictureBlock);
 
 
 function showImage(imageIndex, containerElement){
+  
   containerElement.style.backgroundImage = `url(./images/${picArr[imageIndex]})`;
- //get list of indicators
   let indItems;
   const indicatorList = document.getElementById('indicatorList');
   if(indicatorList) {
-    //delete list of indicators
     divIndicator.removeChild(indicatorList);
   } 
-  //create new element with other picture
+
   indItems = document.createElement('ul');    
   divIndicator.appendChild(indItems);
   indItems.setAttribute('id', 'indicatorList');
 
   for (let i = 0; i < picArr.length; i++){
-    item = document.createElement('li');
+    let item = document.createElement('li');
     indItems.appendChild(item);
     item.setAttribute('data-order', i);
-    //for handling events after recreation indicator board we neeed reassign event handler to every new indicator
     item.addEventListener('click', defineIndicatorNumber);
   }
-  //change colour of running indicator item
-   
+  //change colour of running indicator item   
   indItems.childNodes[imageIndex].setAttribute('id', 'start');
-
 }
 
 function showNextPic(){  
@@ -102,11 +98,14 @@ function showControl() {
     idInterval = setInterval(function(){showNextPic(picArr);}, 2000);
   } 
 }
+
 function stopSlideshow(){  
   clearInterval(idInterval);
   idInterval = undefined;
 }
+
 function defineIndicatorNumber(e){
+  stopSlideshow();
   imageIndex = Number(e.target.getAttribute('data-order'));
   showImage(imageIndex, pictureBlock);
 }
@@ -114,6 +113,7 @@ function defineIndicatorNumber(e){
 const forward = document.querySelector('.right');
 forward.addEventListener('click', showNextPic);
 forward.addEventListener('click', stopSlideshow);
+
 const backward = document.querySelector('.left');
 backward.addEventListener('click', showPreviousPic);
 backward.addEventListener('click', stopSlideshow);
