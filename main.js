@@ -1,3 +1,4 @@
+"use strict";
 let imageIndex = 0;
 //we'll ivoke this constant as an argument in handler functions
 
