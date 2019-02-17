@@ -61,14 +61,12 @@ function showImage(imageIndex, containerElement){
   indItems = document.createElement('ul');    
   divIndicator.appendChild(indItems);
   indItems.setAttribute('id', 'indicatorList');
-
-  for (let i = 0; i < picArr.length; i++){
-    let item = document.createElement('li');
+  picArr.forEach(function(item, index){
+    item = document.createElement('li');
     indItems.appendChild(item);
-    item.setAttribute('data-order', i);
+    item.setAttribute('data-order', index);
     item.addEventListener('click', defineIndicatorNumber);
-  }
-  //change colour of running indicator item   
+  })  
   indItems.childNodes[imageIndex].setAttribute('id', 'start');
 }
 
