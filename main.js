@@ -1,6 +1,6 @@
 "use strict";
 let imageIndex = 0;
-
+let slideShowInProcess = false;
 //array with photo
 const picArr = [
   'golden-retriever-puppy.jpg',
@@ -77,7 +77,9 @@ function showNextPic(){
     imageIndex = 0;   
   }  
   showImage(imageIndex, getPictureBlock);
-  startSlideShow();
+  if(slideShowInProcess === true) {
+    startSlideShow();
+  }  
 }
 
 function showPreviousPic(){
@@ -88,22 +90,28 @@ function showPreviousPic(){
     imageIndex = picArr.length-1;
   }    
   showImage(imageIndex, getPictureBlock);
-  startSlideShow();
+  if(slideShowInProcess === true) {
+    startSlideShow();
+  }  
 }
 
 let idInterval;
 
-function startSlideShow() { 
+function startSlideShow() {   
   if(idInterval){    
    stopSlideshow();
+   stopSlideshow = false;
   } else {
     idInterval = setInterval(function(){showNextPic(picArr);}, 2000);
+    slideShowInProcess = true;
   } 
 }
 
-function stopSlideshow(){  
-  clearInterval(idInterval);
-  idInterval = undefined;
+function stopSlideshow(){
+  if(idInterval)  {
+    clearInterval(idInterval);
+    idInterval = undefined;
+  }
 }
 
 function defineIndicatorNumber(e){
