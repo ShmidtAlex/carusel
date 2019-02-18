@@ -1,6 +1,5 @@
 "use strict";
 let imageIndex = 0;
-//we'll ivoke this constant as an argument in handler functions
 
 //array with photo
 const picArr = [
@@ -13,36 +12,36 @@ const picArr = [
 ];
 
 //get access to "container" div WE DON'T USE WAYS LIKE document.body.children[0], it's UNSAFE!
-const nodesList = document.getElementById('container');
+const createdNodesContainer = document.getElementById('container');
 
 //create new div class mainBlock and incert it at the begining of the child nodes list
-const mainBlockNode = document.createElement('div');
-nodesList.appendChild(mainBlockNode);
-mainBlockNode.setAttribute('class', 'mainBlock');
+const mainBlock = document.createElement('div');
+createdNodesContainer.appendChild(mainBlock);
+mainBlock.setAttribute('class', 'mainBlock');
 
 //create new buttons and div.pictureBlock
 const leftButton = document.createElement('button');
 const rightButton = document.createElement('button');
-const pictureBlockNode = document.createElement('img');
+const pictureBlock = document.createElement('img');
 
 //set up attributes of mainBlock child nodes
 leftButton.setAttribute('class', 'arrow left');
 rightButton.setAttribute('class', 'arrow right');
-pictureBlockNode.setAttribute('class', 'pictureBlock');
+pictureBlock.setAttribute('class', 'pictureBlock');
 
 //put above elements into div.mainBlock
-mainBlockNode.appendChild(leftButton);
-mainBlockNode.appendChild(pictureBlockNode);
-mainBlockNode.appendChild(rightButton);
+mainBlock.appendChild(leftButton);
+mainBlock.appendChild(pictureBlock);
+mainBlock.appendChild(rightButton);
 
 //create div.indicator 
 const divIndicator = document.createElement('div');
 
-//add div.indicator as a last child in nodesList and set it's attributes
-nodesList.appendChild(divIndicator).setAttribute('class', 'indicator');
+//add div.indicator as a last child in createdNodesContainer and set it's attributes
+createdNodesContainer.appendChild(divIndicator).setAttribute('class', 'indicator');
 
 //define const, which keep block with photo
-const pictureBlock = document.querySelector('.pictureBlock');
+const getPictureBlock = document.querySelector('.pictureBlock');
 
 //invoke function for displaying first picture and pannel of indicators
 showImage(imageIndex, pictureBlock);
@@ -53,9 +52,9 @@ function showImage(imageIndex, containerElement){
   
   containerElement.style.backgroundImage = `url(./images/${picArr[imageIndex]})`;
   let indItems;
-  const indicatorList = document.getElementById('indicatorList');
-  if(indicatorList) {
-    divIndicator.removeChild(indicatorList);
+  const getIndicatorList = document.getElementById('indicatorList');
+  if(getIndicatorList) {
+    divIndicator.removeChild(getIndicatorList);
   } 
 
   indItems = document.createElement('ul');    
@@ -70,27 +69,31 @@ function showImage(imageIndex, containerElement){
   indItems.childNodes[imageIndex].setAttribute('id', 'start');
 }
 
-function showNextPic(){  
+function showNextPic(){
+  stopSlideshow();
   if(imageIndex < picArr.length-1) {
     imageIndex++;    
   } else {
     imageIndex = 0;   
   }  
-  showImage(imageIndex, pictureBlock);
+  showImage(imageIndex, getPictureBlock);
+  startSlideShow();
 }
 
 function showPreviousPic(){
+  stopSlideshow();
   if (imageIndex > 0){
     imageIndex--;   
   } else {
     imageIndex = picArr.length-1;
   }    
-  showImage(imageIndex, pictureBlock);
+  showImage(imageIndex, getPictureBlock);
+  startSlideShow();
 }
 
 let idInterval;
 
-function showControl() { 
+function startSlideShow() { 
   if(idInterval){    
    stopSlideshow();
   } else {
@@ -106,21 +109,21 @@ function stopSlideshow(){
 function defineIndicatorNumber(e){
   stopSlideshow();
   imageIndex = Number(e.target.getAttribute('data-order'));
-  showImage(imageIndex, pictureBlock);
+  showImage(imageIndex, getPictureBlock);
 }
 
-const forward = document.querySelector('.right');
-forward.addEventListener('click', showNextPic);
-forward.addEventListener('click', stopSlideshow);
+const forwardButton = document.querySelector('.right');
+forwardButton.addEventListener('click', showNextPic);
+//forwardButton.addEventListener('click', stopSlideshow);
 
-const backward = document.querySelector('.left');
-backward.addEventListener('click', showPreviousPic);
-backward.addEventListener('click', stopSlideshow);
+const backwardButton = document.querySelector('.left');
+backwardButton.addEventListener('click', showPreviousPic);
+//backwardButton.addEventListener('click', stopSlideshow);
 
 
 //picture as a button for slideshow.
 const slideShowButton = document.querySelector('.pictureBlock');
-slideShowButton.addEventListener('click', showControl);
+slideShowButton.addEventListener('click', startSlideShow);
 
 //define const, which keep massive like object of li items
 const indicatorButton = document.querySelectorAll('li');
