@@ -41,7 +41,7 @@ const divIndicator = document.createElement('div');
 createdNodesContainer.appendChild(divIndicator).setAttribute('class', 'indicator');
 
 //define const, which keep block with photo
-const getPictureBlock = document.querySelector('.pictureBlock');
+const pictureContainer = document.querySelector('.pictureBlock');
 
 //invoke function for displaying first picture and pannel of indicators
 showImage(imageIndex, pictureBlock);
@@ -52,9 +52,9 @@ function showImage(imageIndex, containerElement){
   
   containerElement.style.backgroundImage = `url(./images/${picArr[imageIndex]})`;
   let indItems;
-  const getIndicatorList = document.getElementById('indicatorList');
-  if(getIndicatorList) {
-    divIndicator.removeChild(getIndicatorList);
+  const indicatorContainer = document.getElementById('indicatorList');
+  if(indicatorContainer) {
+    divIndicator.removeChild(indicatorContainer);
   } 
 
   indItems = document.createElement('ul');    
@@ -76,7 +76,7 @@ function showNextPic(){
   } else {
     imageIndex = 0;   
   }  
-  showImage(imageIndex, getPictureBlock);
+  showImage(imageIndex, pictureContainer);
   if(slideShowInProcess === true) {
     startSlideShow();
   }  
@@ -89,7 +89,7 @@ function showPreviousPic(){
   } else {
     imageIndex = picArr.length-1;
   }    
-  showImage(imageIndex, getPictureBlock);
+  showImage(imageIndex, pictureContainer);
   if(slideShowInProcess === true) {
     startSlideShow();
   }  
@@ -100,7 +100,7 @@ let idInterval;
 function startSlideShow() {   
   if(idInterval){    
    stopSlideshow();
-   stopSlideshow = false;
+   slideShowInProcess = false;
   } else {
     idInterval = setInterval(function(){showNextPic(picArr);}, 2000);
     slideShowInProcess = true;
@@ -108,8 +108,10 @@ function startSlideShow() {
 }
 
 function stopSlideshow(){
+  console.log(idInterval);
   if(idInterval)  {
     clearInterval(idInterval);
+    console.log(idInterval);
     idInterval = undefined;
   }
 }
@@ -117,7 +119,7 @@ function stopSlideshow(){
 function defineIndicatorNumber(e){
   stopSlideshow();
   imageIndex = Number(e.target.getAttribute('data-order'));
-  showImage(imageIndex, getPictureBlock);
+  showImage(imageIndex, pictureContainer);
 }
 
 const forwardButton = document.querySelector('.right');
