@@ -53,7 +53,7 @@ function showImage(imageIndex, containerElement){
   containerElement.style.backgroundImage = `url(./images/${picArr[imageIndex]})`;
   let indItems;
   const indicatorContainer = document.getElementById('indicatorList');
-  if(indicatorContainer) {
+  if (indicatorContainer) {
     divIndicator.removeChild(indicatorContainer);
   } 
 
@@ -71,13 +71,13 @@ function showImage(imageIndex, containerElement){
 
 function showNextPic(){
   stopSlideshow();
-  if(imageIndex < picArr.length-1) {
+  if (imageIndex < picArr.length-1) {
     imageIndex++;    
   } else {
     imageIndex = 0;   
   }  
   showImage(imageIndex, pictureContainer);
-  if(slideShowInProcess === true) {
+  if (slideShowInProcess === true) {
     startSlideShow();
   }  
 }
@@ -90,7 +90,7 @@ function showPreviousPic(){
     imageIndex = picArr.length-1;
   }    
   showImage(imageIndex, pictureContainer);
-  if(slideShowInProcess === true) {
+  if (slideShowInProcess === true) {
     startSlideShow();
   }  
 }
@@ -98,7 +98,7 @@ function showPreviousPic(){
 let idInterval;
 
 function startSlideShow() {   
-  if(idInterval){    
+  if (idInterval){    
    stopSlideshow();
    slideShowInProcess = false;
   } else {
@@ -108,10 +108,8 @@ function startSlideShow() {
 }
 
 function stopSlideshow(){
-  console.log(idInterval);
-  if(idInterval)  {
+  if (idInterval)  {
     clearInterval(idInterval);
-    console.log(idInterval);
     idInterval = undefined;
   }
 }
